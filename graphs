@@ -1,0 +1,4 @@
+minimum spanning tree
+1. every vertex of G belongs to an edge in T
+2. the edge set is a subset if G(E)
+3. No cycle in tree
