@@ -336,7 +336,7 @@ void delete(){
         temp2->prev=temp1;
         while(temp2->num!=i)
         {
-            temp->next->prev=temp;
+            // temp->next->prev=temp;
             temp=temp->next;
             temp1=temp->next;
             temp1->prev=temp;

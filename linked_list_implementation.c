@@ -329,16 +329,32 @@ void delete(){
 		scanf("%d",&i);
 		temp=start;
 		temp1=temp->next;
-		temp2=temp1->next;
+        temp2=temp1->next;
 		while(temp2->num!=i)
 		{
 			temp=temp->next;
 			temp1=temp->next;
-			temp2=temp1->next;
+            temp2=temp1->next;
 		}
 		temp->next=temp2;
 		temp1->next=NULL;
 		free(temp1);}
+    // Without temp2 variable deletion before node
+	// void del_before(){
+	// 	int i;
+	// 	struct linklist *temp, *temp1, *temp2;
+	// 	printf("\n before which node you want to delete: ");
+	// 	scanf("%d",&i);
+	// 	temp=start;
+	// 	temp1=temp->next;
+	// 	while(temp1->next->num!=i)
+	// 	{
+	// 		temp=temp->next;
+	// 		temp1=temp->next;
+	// 	}
+	// 	temp->next=temp1->next;
+	// 	temp1->next=NULL;
+	// 	free(temp1);}
 	void del_after(){
 		int n;
 		struct linklist *temp,*temp1,*temp2;
@@ -428,22 +444,23 @@ void sort(){
 	int n;
 	struct linklist *temp,*temp1;
 	temp=start;
-	while(temp==start)
-	while(temp!=NULL)
-	{
-		temp1=temp->next;
-		while(temp1!=NULL)
-		{
-			if(temp->num>temp1->num)
-			{
-				n=temp->num;
-				temp->num=temp1->num;
-				temp1->num=n;
-			}
-			temp1=temp1->next;
-		}
-		temp=temp->next;
-	}}
+	// while(temp==start)
+        while(temp!=NULL)
+        {
+            temp1=temp->next;
+            while(temp1!=NULL)
+            {
+                if(temp->num > temp1->num)
+                {
+                    n=temp->num;
+                    temp->num=temp1->num;
+                    temp1->num=n;
+                }
+                temp1=temp1->next;
+            }
+            temp=temp->next;
+        }
+}
 
 
 
