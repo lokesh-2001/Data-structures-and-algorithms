@@ -12,6 +12,8 @@ Algorithm
 * If the element in the sorted list is smaller than the current element, iterate to the next element. Otherwise, shift all the greater element in the list by one position towards the right.
 * Insert the value at the correct position.
 * Repeat until the complete list is sorted.
+
+
 set i=1
 start while loop for i < length of A
     set j=1
