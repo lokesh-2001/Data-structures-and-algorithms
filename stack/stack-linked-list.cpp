@@ -50,6 +50,7 @@ void push(){
     temp->next=new_node;
     top=new_node;
 }
+
 void pop(){
     int data;
     Node *temp1;
