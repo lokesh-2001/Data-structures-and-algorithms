@@ -50,25 +50,6 @@ void push(){
     temp->next=new_node;
     top=new_node;
 }
-//     // st *node,*temp;
-//     // int data;
-//     // printf("enter any data to PUSH into stack:");
-//     // scanf("%d",&data);
-//     // node =(st*)malloc(sizeof(st));
-//     // node ->item = data;
-//     // node ->next = NULL;
-//     // if(top==NULL)
-//     // {
-//     //     top = start = node;
-//     //     return;
-//     // }
-//     // temp=start;
-//     // while(temp->next!=NULL)
-//     // {
-//     //         temp=temp->next; //temp is last node
-//     // }
-//     // temp->next=node;
-//     // top = node ;}
 void pop(){
     int data;
     Node *temp1;
