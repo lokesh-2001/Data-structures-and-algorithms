@@ -1,0 +1,2 @@
+This repo contains the codes for Data structures like linked list, stack, queue, and basic codes for trees and graphs, the codes are in c and c++.
+It also contains sorting and searching algorithms in c, c++, python and basic concepts and important points about them.
