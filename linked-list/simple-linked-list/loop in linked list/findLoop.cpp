@@ -1,4 +1,19 @@
+// length of loop
+
+// It is known that Floyd’s Cycle detection algorithm terminates when fast and slow pointers meet at a common point. 
+// It is also known that this common point is one of the loop nodes. Store the address of this common point in a 
+// pointer variable say (ptr). Then initialize a counter with 1 and start from the common point and keeps on visiting 
+// the next node and increasing the counter till the common pointer is reached again. 
+// At that point, the value of the counter will be equal to the length of the loop.
+
+// Algorithm
+// 1) Find the common point in the loop by using the Floyd’s Cycle detection algorithm
+// 2) Store the pointer in a temporary variable and keep a count = 0
+// 3) Traverse the linked list until the same node is reached again and increase the count while moving to next node.
+// 4) Print the count as length of loop
+
 // Create a loop
+
 #include<bits/stdc++.h>
 using namespace std;
 class Node
@@ -122,10 +137,22 @@ void display(Node *head)
     }
 }
 
+int lengthLoop(Node *head){
+    Node *temp = head;  // for 1 hop
+    Node *temp1= head; // for 2 hop
+    while(temp && temp1 && temp1->next){
+        temp=temp->next;
+        temp1=temp1->next->next;
+    if(temp==temp1)
+        return lengthLoop(temp);
+    }
+    return 0;
+}
+
 int main()
 {
     Node *head = NULL;
-    int ch,num;
+    int ch,num,len;
     system("cls");
     do
     {
@@ -134,7 +161,7 @@ int main()
         cout << endl
              << "2. Insert a Loop in linked list";
         cout << endl
-             << "3. Display linked list with loop";
+             << "3. Count Nodes in the loop";
         cout << endl
              << "4. Display";
         cout << endl
@@ -175,8 +202,13 @@ int main()
             cin>>num;
             insertLoop(head,num);
             break;
-        // Display Loop function
+        // Count nodes in loop function
         case 3:
+            len = lengthLoop(head);
+            if(len == 0 )
+                cout<<"No loop exists";
+            else
+                cout<<endl<<"Length of loop: "<<len<<endl;
             break;
         // display function call
         case 4:

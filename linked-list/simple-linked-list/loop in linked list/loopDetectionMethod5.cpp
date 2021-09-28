@@ -1,4 +1,11 @@
-// Create a loop
+// Loop detection method 5
+
+// In this method, two pointers are created (first on always point towards head) and the last
+// each time the last pointer moves we calculate the no of nodes bw two pointers 
+// and check whether the current no of nodes > previous no of nodes if yes we proceed by moving last pointer
+// else it means we've reached the end of loop  
+
+
 #include<bits/stdc++.h>
 using namespace std;
 class Node
@@ -16,6 +23,7 @@ void insertBeg(Node **head)
     cin >> new_node->data;
     new_node->next = (*head);
     (*head) = new_node;
+
 }
 int countNodes(Node *head){
     int count=0;
@@ -49,7 +57,6 @@ void displayLoop(Node *head, int num){
         count++;
         temp=temp->next;
     }
-
 }
 
 // Loop Insertion function (basically to insert a loop)
@@ -122,10 +129,36 @@ void display(Node *head)
     }
 }
 
+
+bool detectLoop(Node *head){
+    Node *temp= new Node;
+    Node *start=head, *last = head;
+    // no of nodes b/w current and start and last
+    int curr_len=0;
+    // no of nodes b/w previous first and last
+    int prev_len= -1;
+    while(curr_len > prev_len && last!=NULL){
+        // set prev_len to current length then update the current length
+        prev_len= curr_len;
+        last=last->next;
+    }
+    if(last==NULL)
+        return false;
+    return true;
+}
+
+// Complexity Analysis:  
+
+//  Complexity Analysis:  
+
+// Time complexity: O(n^2)
+// Auxiliary Space: O(1)
+
 int main()
 {
     Node *head = NULL;
     int ch,num;
+    bool loop;
     system("cls");
     do
     {
@@ -138,7 +171,9 @@ int main()
         cout << endl
              << "4. Display";
         cout << endl
-             << "5. End";
+             << "5. Detect Loop Using Method 4";
+        cout << endl
+             << "6. End";
         cout << endl
              << "Enter choice: ";
         cin >> ch;
@@ -177,17 +212,26 @@ int main()
             break;
         // Display Loop function
         case 3:
+            
             break;
         // display function call
         case 4:
             display(head);
             break;
-        case 5:
+        case 5: 
+            loop= detectLoop(head);
+            if(loop)
+                cout<<"Loop Detected!!";
+            else
+                cout<<"No Loop detected";
+            break;
+        case 6:
             cout << "INVALID CHOICE";
             break;
         default:
             cout << "INVALID CHOICE";
             break;
         }
-    } while (ch != 5);
+    } while (ch != 6);
 }
+

@@ -145,8 +145,13 @@ bool detectLoop(Node *head){
         temp=temp->next;
     }
     return false;
-
 }
+// Complexity Analysis:  
+
+// Time complexity:O(n). 
+// Only one traversal of the loop is needed.
+// Auxiliary Space:O(1). 
+// No extra space is needed.
 
 
 
@@ -208,7 +213,7 @@ int main()
             break;
         // Display Loop function
         case 3:
-            
+
             break;
         // display function call
         case 4:
