@@ -223,18 +223,17 @@ void edit(Node *head){
 }
 
 // reverse link list function
-// void reverse(Node *head){
-//     Node *temp=head,*ptr,*old;
-//     ptr=NULL;
-//     while(temp!=NULL){
-//         old=ptr;
-//         ptr=temp;
-//         temp=temp->next;
-//         ptr->next=old;
-//     }
-//     head=ptr;
-// }
-
+void reverse(Node **head){
+    Node *temp=*head,*ptr,*old;
+    ptr=NULL;
+    while(temp!=NULL){
+        old=ptr;
+        ptr=temp;
+        temp=temp->next;
+        ptr->next=old;
+    }
+    *head=ptr;
+}
 // count function
 void count(Node *head){
     Node *temp=head;
@@ -268,7 +267,7 @@ int main(){
         cout<<endl<<"3. Display";
         cout<<endl<<"4. Count";
         cout<<endl<<"5. Edit";
-        // cout<<endl<<"6. Reverse";
+        cout<<endl<<"6. Reverse";
         cout<<endl<<"7. Sort";
         cout<<endl<<"8. End";
         cout<<endl<<"Enter choice: ";
@@ -362,9 +361,9 @@ int main(){
         case 5 : 
         edit(head);
         break;
-        // case 6 : 
-        // reverse(head);
-        // break;
+        case 6 : 
+        reverse(&head);
+        break;
         case 7 : 
         sort(head);
         break;
