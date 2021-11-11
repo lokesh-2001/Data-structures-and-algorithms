@@ -1,5 +1,3 @@
-// DEPTH FIRST TRAVERSALS
-// inorder, postorder, preorder 
 #include<bits/stdc++.h>
 using namespace std;
 class Node{
@@ -7,40 +5,35 @@ class Node{
     int data;
     Node *left;
     Node *right;
+    bool rightThreaded;
     Node( int x ){
         data = x;
         left = NULL;
         right = NULL;
+        rightThreaded = false;
     }
 };
 
-// inorder traversal
-    // Left root right
-void inorder(Node *node){
-    if(node== NULL)
-        return;
-    inorder(node -> left);
-    cout<<node->data<<" ";
-    inorder(node -> right);
+// function to find the leftmost node in a tree in rooted with n
+Node * leftmost(Node *n){
+    if(n == NULL)
+        return n;
+    while(n->left!=NULL)
+        n=n->left;
+    return n;
 }
 
-void postorder(Node *node){
-    if(node== NULL)
-        return;
-    postorder(node -> left);
-    postorder(node -> right);
-    cout<<node->data<<" ";
+// function to do inorder traversal in a threaded binary tree
+void inorder(Node *root){
+    Node *temp = leftmost(root);
+    while(temp!=NULL){
+        cout<<temp->data;
+    if(temp -> rightThreaded)
+        temp = temp->right;
+    else
+        temp = leftmost(temp->right);
+    }
 }
-
-void preorder(Node *node){
-    if(node== NULL)
-        return;
-    cout<<node->data<<" ";
-    preorder(node -> left);
-    preorder(node -> right);
-}
-
-// Time Complexity: O(n) 
 
 int main(){
         //                  52
@@ -68,14 +61,6 @@ int main(){
     root->right->left->left = new Node(76);
     root->right->left->right = new Node(84);
 
-    cout<<endl<<"Inoder Traversal: "<<endl;
-    inorder(root);
-
-    cout<<endl<<"Postoder Traversal: "<<endl;
-    postorder(root);
-
-    cout<<endl<<"preoder Traversal: "<<endl;
-    preorder(root);
 
 
 }

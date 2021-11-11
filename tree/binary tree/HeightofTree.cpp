@@ -23,7 +23,6 @@ int height(Node * node){
         return (lHeight + 1);
     else
         return (rHeight + 1);
-
 }
 
 
