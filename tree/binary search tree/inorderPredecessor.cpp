@@ -1,3 +1,4 @@
+// to find inorder predecessor of a given node
 #include<bits/stdc++.h>
 using namespace std;
 class Node{
@@ -8,7 +9,9 @@ class Node{
         Node(int);
         Node * insert(Node *,int);
         void inorder(Node *);
-        int search(Node *,int);
+        Node * minNodeR(Node *);
+        Node * inorderPredecessor(Node *,int);
+        Node *  search(Node *,int);
 };
 Node :: Node()
     :data(0) 
@@ -32,12 +35,18 @@ Node* Node::insert(Node *root,int data){
     return root;
 }
 
-int Node:: search(Node *root, int data){
+Node* Node ::  search(Node *root, int data){
     if(root->data == data)
-        return root->data;
+        return root;
     if(root->data < data)
         return search(root->right,data);
     return search(root->left,data);
+}
+
+Node* Node:: minNodeR(Node* temp){
+    while(temp && temp->left){
+        temp=temp->left;}
+    return temp;
 }
 void Node:: inorder(Node *root){
     if(!root)
@@ -46,7 +55,24 @@ void Node:: inorder(Node *root){
     cout<<root->data<<" ";
     inorder(root->right);
 }
-
+Node* Node:: inorderPredecessor(Node* root,int data){
+    Node* temp = this->Node::search(root,data);
+    if(!temp)
+        return NULL;
+    if(root->data)
+        return minNodeR(temp->right);
+    Node * successor = NULL;
+    Node * ancestor = root;
+    while(ancestor!=temp){
+        if(temp->data < ancestor->data){
+            successor = ancestor;
+            ancestor = ancestor->left;
+        }
+        else
+            ancestor = ancestor->left;
+    }
+    return ancestor;
+}
 
 
 int main(){
@@ -64,7 +90,8 @@ int main(){
     b.insert(root,96);
     b.insert(root,23);
     b.inorder(root);
-    cout<<endl<<b.search(root,96);
+    Node * ancestor = b.inorderPredecessor(root,25); 
+    cout<<endl<<ancestor->data;
 
 }
 

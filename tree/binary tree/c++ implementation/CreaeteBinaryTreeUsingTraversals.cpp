@@ -20,6 +20,7 @@ Node *newNode(char key){
     temp->left = temp->right = NULL;
     return temp;
 }
+// https://www.geeksforgeeks.org/construct-tree-from-given-inorder-and-preorder-traversal/
 
 // Node *build(char in[],char pre[])
 

@@ -1,3 +1,4 @@
+// to find inorder predecessor and successor
 #include<bits/stdc++.h>
 using namespace std;
 class Node{
@@ -8,7 +9,10 @@ class Node{
         Node(int);
         Node * insert(Node *,int);
         void inorder(Node *);
-        int search(Node *,int);
+        Node * minNodeR(Node *);
+        Node * inorderPredecessor(Node *,int);
+        Node * inorderSuccessor(Node *,int);
+        Node *  search(Node *,int);
 };
 Node :: Node()
     :data(0) 
@@ -32,12 +36,18 @@ Node* Node::insert(Node *root,int data){
     return root;
 }
 
-int Node:: search(Node *root, int data){
+Node* Node ::  search(Node *root, int data){
     if(root->data == data)
-        return root->data;
+        return root;
     if(root->data < data)
         return search(root->right,data);
     return search(root->left,data);
+}
+
+Node* Node:: minNodeR(Node* temp){
+    while(temp && temp->left){
+        temp=temp->left;}
+    return temp;
 }
 void Node:: inorder(Node *root){
     if(!root)
@@ -46,7 +56,19 @@ void Node:: inorder(Node *root){
     cout<<root->data<<" ";
     inorder(root->right);
 }
-
+// minimum value in left subtree
+Node* Node:: inorderSuccessor(Node* root,int data){
+    if(!root)
+        return NULL;
+    if(root->data == data  && root->left !=NULL){
+        Node * temp = root->right;
+        while(temp->left)
+            temp=temp->left;
+        return temp;
+    }
+    // if(root->data > data)
+        
+}
 
 
 int main(){
@@ -64,8 +86,7 @@ int main(){
     b.insert(root,96);
     b.insert(root,23);
     b.inorder(root);
-    cout<<endl<<b.search(root,96);
+    Node * ancestor = b.inorderSuccessor(root,25); 
+    cout<<endl<<ancestor->data;
 
 }
-
-

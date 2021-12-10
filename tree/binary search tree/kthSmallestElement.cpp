@@ -3,12 +3,13 @@ using namespace std;
 class Node{
     public:
         int data;
+        int lcount;
         Node *left,*right;
         Node();
         Node(int);
         Node * insert(Node *,int);
         void inorder(Node *);
-        int search(Node *,int);
+        Node * kth(Node *,int);
 };
 Node :: Node()
     :data(0) 
@@ -25,20 +26,27 @@ Node :: Node(int x){
 Node* Node::insert(Node *root,int data){
     if(!root)
         return new Node(data);
-    if(data > root->data)
+    if(data > root->data){
         root->right = insert(root->right, data);
+        root->lcount++;    
+    }
     if(data < root->data)
         root->left = insert(root->left, data);
     return root;
 }
 
-int Node:: search(Node *root, int data){
-    if(root->data == data)
-        return root->data;
-    if(root->data < data)
-        return search(root->right,data);
-    return search(root->left,data);
-}
+Node* Node:: kth(Node *root, int k){
+    if(!root)
+        return NULL;
+    int count = root->lcount + 1;
+    if(k==lcount)
+        return root;
+    if(count>k)
+        return kth(root->left, k)
+
+    return kth(root->right,  k - count);
+
+}   
 void Node:: inorder(Node *root){
     if(!root)
         return;
@@ -64,7 +72,7 @@ int main(){
     b.insert(root,96);
     b.insert(root,23);
     b.inorder(root);
-    cout<<endl<<b.search(root,96);
+    // cout<<endl<<b.search(root,96);
 
 }
 

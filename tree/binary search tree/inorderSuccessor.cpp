@@ -1,49 +1,98 @@
+// to find inorder successor of a given node is the lowest value node in right sub tree
 #include<bits/stdc++.h>
 using namespace std;
 class Node{
     public:
-    int data;
-    Node *left;
-    Node *right;
+        int data;
+        Node *left,*right;
+        Node();
+        Node(int);
+        Node * insert(Node *,int);
+        void inorder(Node *);
+        Node * minNodeR(Node *);
+        Node * inorderSuccessor(Node *,int);
+        Node *  search(Node *,int);
 };
+Node :: Node()
+    :data(0) 
+    ,left(NULL)
+    ,right(NULL)
+{
+}
+Node :: Node(int x){
+    data  = x ;
+    left  = NULL ;
+    right = NULL ;
+}
 
-Node *findmin(Node *root){
-    if(root ==  NULL)
-        return NULL;
-    while(root->left!=NULL)
-        root = root->left;
+Node* Node::insert(Node *root,int data){
+    if(!root)
+        return new Node(data);
+    if(data > root->data)
+        root->right = insert(root->right, data);
+    if(data < root->data)
+        root->left = insert(root->left, data);
     return root;
 }
-Node *  search(Node *root, int data){
+
+Node* Node ::  search(Node *root, int data){
     if(root->data == data)
         return root;
     if(root->data < data)
         return search(root->right,data);
     return search(root->left,data);
 }
-Node* minNodeR(Node* root){
-    if(!root->left)
-        return root;
-    minNodeR(root->left);
+
+Node* Node:: minNodeR(Node* temp){
+    while(temp && temp->left){
+        temp=temp->left;}
+    return temp;
 }
-Node *getSuccessor(Node *root, int data){
-    Node *temp = search(root,data);
-    if(!temp) 
+void Node:: inorder(Node *root){
+    if(!root)
+        return;
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+Node* Node:: inorderSuccessor(Node* root,int data){
+    Node* temp = this->Node::search(root,data);
+    if(!temp)
         return NULL;
-    // case 1 node has a right subtree
-    if(current->right)
+    if(root->data)
         return minNodeR(temp->right);
-    }  
-    // case 2: no right subtree
     Node * successor = NULL;
     Node * ancestor = root;
-    while(ancestor != temp){
+    while(ancestor!=temp){
         if(temp->data < ancestor->data){
             successor = ancestor;
             ancestor = ancestor->left;
         }
         else
-            ancestor = ancestor->right;
+            ancestor = ancestor->left;
     }
-    return successor;
+    return ancestor;
 }
+
+
+int main(){
+    // BST
+    //               52
+    //           25      96
+    //       20      41
+    //         23  36
+    Node b,  *root = NULL;
+    root = b.insert(root,52);
+    b.insert(root,25);
+    b.insert(root,41);
+    b.insert(root,20);
+    b.insert(root,36);
+    b.insert(root,96);
+    b.insert(root,23);
+    b.inorder(root);
+    Node * ancestor = b.inorderSuccessor(root,25); 
+    cout<<endl<<ancestor->data;
+
+}
+
+
