@@ -1,9 +1,9 @@
 // detect cycle in a graph
 import java.util.*;
-public class DetectCycleDirected {
+public class DetectCycleDirectedDFS {
     private final int n;
     private final List<List<Integer>> adj;
-    DetectCycleDirected(int v){
+    DetectCycleDirectedDFS(int v){
         this.n = v;
         adj  = new ArrayList<>(n);
         for(int i=0;i<v;i++)
@@ -37,7 +37,7 @@ public class DetectCycleDirected {
         return false;
     }
     public static void main(String[] args) {
-        DetectCycleDirected g = new DetectCycleDirected(4);
+        DetectCycleDirectedDFS g = new DetectCycleDirectedDFS(4);
         g.addEdge(0,1);
         g.addEdge(0,2);
         g.addEdge(1,2);
